@@ -1,12 +1,13 @@
 * {
   text-align: center;
+  background-size: cover;
 }
 
 div {
   height: 150px;
   width: 150px;
-  border: 2px solid black;
   margin: 0 auto;
+  border-radius: 5%;
 }
 
 button {
@@ -15,4 +16,10 @@ button {
   color: white;
   padding: 10px;
   font-size: 2em;
+  border: none;
+  border-radius: 5%;
+}
+
+button:hover {
+  opacity: 1;
 }
