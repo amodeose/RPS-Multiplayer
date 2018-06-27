@@ -4,7 +4,7 @@ var p1choice;
 var p2choice;
 var p1name;
 var p2name;
-var pnumber;
+var pnumber = false;
 
 $('.option').toggle();
 
@@ -23,28 +23,43 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+database.ref().once('value', function(snapshot) {
+
+    if (snapshot.child("player1").exists()) {
+      pnumber = 2;
+    } else {
+      pnumber = 1;
+    };
+
+});
+
+
+
 
 // Username Function
 
 $('.submit').click(function(){
 
-  if (p1name === false) {
+  if (pnumber === 1) {
 
-    pnumber = 1;
     p1name = $('.username-input').val();
     $('.player-name').text(p1name);
     $('.submit').remove();
     $('.username-input').remove();
-
+    database.ref('player1').set({
+      username: p1name
+    });
     $('.option').toggle();
 
-  } else if (!p2name) {
+  } else if (pnumber === 2) {
 
     p2name = $('.username-input').val();
     $('.player-name').text(p2name);
     $('.submit').remove();
     $('.username-input').remove();
-
+    database.ref('player2').set({
+      username: p2name
+    });
     $('.option').toggle();
   } else {
 
@@ -55,11 +70,7 @@ $('.submit').click(function(){
 // Choice Function
 
 $('.option').click(function(){
-
   p1choice = $(this).text().toLowerCase();
-
-
-
   if (p1choice === 'rock') {
     $('.p1choice').attr('src', 'assets/images/rock.png');
   } else if (p1choice === 'paper') {
@@ -67,7 +78,6 @@ $('.option').click(function(){
   } else {
     $('.p1choice').attr('src', 'assets/images/scissors.png');
   }
-
 })
 
 // Logout Function
