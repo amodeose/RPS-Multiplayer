@@ -22,7 +22,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// Assign player number
+// Assign player number on page load
 
 database.ref().once('value', function(snapshot) {
     if (snapshot.child("player1").exists() && snapshot.child("player2").exists()) {
@@ -34,7 +34,7 @@ database.ref().once('value', function(snapshot) {
     };
 });
 
-// Keep variables updated
+// Keep variables updated throughout game
 
 database.ref().on('value', function(snapshot) {
     if (snapshot.child("player1").exists()) {
