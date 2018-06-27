@@ -4,8 +4,8 @@ var p1choice = false;
 var p2choice = false;
 var p1name;
 var p2name;
-var p1wins;
-var p2wins;
+var p1wins = 0;
+var p2wins = 0;
 var winner = false;
 var pnumber = false;
 $('.option').toggle();
@@ -41,40 +41,53 @@ database.ref().once('value', function(snapshot) {
 
 database.ref().on('value', function(snapshot) {
 
-    if (snapshot.child("player1").exists()) {
-      p1name = snapshot.val().player1.username;
-      p1choice = snapshot.val().player1.choice;
+  if (snapshot.child("player1").exists()) {
 
-      if (pnumber === 2) {
-        $('.opponent-name').text(p1name);
-      }
-    };
+    p1name = snapshot.val().player1.username;
+    p1choice = snapshot.val().player1.choice;
 
-    if (snapshot.child("player2").exists()) {
-      p2name = snapshot.val().player2.username;
-      p2choice = snapshot.val().player2.choice;
+    if (pnumber === 2) {
+      $('.opponent-name').text(p1name);
+    }
+  };
 
-      if (pnumber === 1) {
-        $('.opponent-name').text(p2name);
-      }
+  if (snapshot.child("player2").exists()) {
+
+    p2name = snapshot.val().player2.username;
+    p2choice = snapshot.val().player2.choice;
+
+    if (pnumber === 1) {
+      $('.opponent-name').text(p2name);
+    }
+  }
+
+  if (snapshot.child("winner").exists()) {
+
+    winner = snapshot.val().winner.username;
+    $('.message').text('Winner: ' + winner);
+    database.ref("winner").remove();
+
+    if (pnumber === 1) {
+      $('.opponent-choice').attr('src', 'assets/images/' + snapshot.val().player2.choice + '.png');
+    } else {
+      $('.opponent-choice').attr('src', 'assets/images/' + snapshot.val().player1.choice + '.png');
     }
 
-    if (snapshot.child("winner").exists()) {
-      winner = snapshot.val().winner.username;
-      $('.message').text('Winner: ' + winner);
-      database.ref("winner").remove();
+    database.ref("player1").child('choice').remove();
+    database.ref("player2").child('choice').remove();
+  }
 
+  p1wins = snapshot.val().player1.wins;
+  p2wins = snapshot.val().player2.wins;
 
-      if (pnumber === 1) {
-        $('.opponent-choice').attr('src', 'assets/images/' + snapshot.val().player2.choice + '.png');
-      } else {
-        $('.opponent-choice').attr('src', 'assets/images/' + snapshot.val().player1.choice + '.png');
-      }
+  if (pnumber === 1) {
+    $('.player-wins').text(p1wins);
+    $('.opponent-wins').text(p2wins);
+  } else {
+    $('.player-wins').text(p2wins);
+    $('.opponent-wins').text(p1wins);
+  }
 
-      database.ref("player1").child('choice').remove();
-      database.ref("player2").child('choice').remove();
-
-    }
 });
 
 // Set Username Function //
@@ -89,6 +102,7 @@ $('.submit').click(function(){
     $('.username-input').remove();
     database.ref('player1').set({
       username: p1name,
+      wins: 0
     });
     $('.option').toggle();
 
@@ -100,6 +114,7 @@ $('.submit').click(function(){
     $('.username-input').remove();
     database.ref('player2').set({
       username: p2name,
+      wins: 0
     });
     $('.option').toggle();
   } else {
@@ -114,6 +129,8 @@ $('.option').click(function(){
   var choice = $(this).text().toLowerCase();
 
   $('.message').text('');
+
+  $('.opponent-choice').attr('src', '');
 
   if (pnumber === 1) {
 
@@ -134,10 +151,12 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p2name
           });
+          p2wins++;
         } else {
           database.ref('winner').set({
             username: p1name
           });
+          p1wins++;
         }
       }
 
@@ -153,6 +172,7 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p1name
           });
+          p1wins++;
         } else if (p2choice === 'paper') {
           database.ref('winner').set({
             username: "tie"
@@ -161,6 +181,7 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p2name
           });
+          p2wins++;
         }
       }
 
@@ -176,10 +197,12 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p2name
           });
+          p2wins++;
         } else if (p2choice === 'paper') {
           database.ref('winner').set({
             username: p1name
           });
+          p1wins++;
         } else {
           database.ref('winner').set({
             username: "tie"
@@ -207,10 +230,12 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p1name
           });
+          p1wins++;
         } else {
           database.ref('winner').set({
             username: p2name
           });
+          p2wins++;
         }
       }
 
@@ -226,6 +251,7 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p2name
           });
+          p2wins++;
         } else if (p1choice === 'paper') {
           database.ref('winner').set({
             username: "tie"
@@ -234,6 +260,7 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p1name
           });
+          p1wins++
         }
       }
 
@@ -249,10 +276,12 @@ $('.option').click(function(){
           database.ref('winner').set({
             username: p1name
           });
+          p1wins++;
         } else if (p1choice === 'paper') {
           database.ref('winner').set({
             username: p2name
           });
+          p2wins++;
         } else {
           database.ref('winner').set({
             username: "tie"
@@ -260,6 +289,22 @@ $('.option').click(function(){
         }
       }
     }
+  }
+
+  database.ref('player1').update({
+    wins: p1wins
+  });
+
+  database.ref('player2').update({
+    wins: p2wins
+  });
+
+  if (pnumber === 1) {
+    $('.player-wins').text(p1wins);
+    $('.opponent-wins').text(p2wins);
+  } else {
+    $('.player-wins').text(p2wins);
+    $('.opponent-wins').text(p1wins);
   }
 })
 
