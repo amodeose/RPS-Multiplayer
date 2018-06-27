@@ -1,7 +1,7 @@
 //Global Scope
 
-var p1choice;
-var p2choice;
+var p1choice = false;
+var p2choice = false;
 var p1name;
 var p2name;
 var pnumber = false;
@@ -56,6 +56,7 @@ database.ref().on('value', function(snapshot) {
       }
 
     }
+
 });
 
 // Username Function
@@ -70,7 +71,6 @@ $('.submit').click(function(){
     $('.username-input').remove();
     database.ref('player1').set({
       username: p1name,
-      choice: ""
     });
     $('.option').toggle();
 
@@ -82,7 +82,6 @@ $('.submit').click(function(){
     $('.username-input').remove();
     database.ref('player2').set({
       username: p2name,
-      choice: ""
     });
     $('.option').toggle();
   } else {
@@ -101,12 +100,36 @@ $('.option').click(function(){
     if (choice === 'rock') {
       $('.player-choice').attr('src', 'assets/images/rock.png');
       p1choice = 'rock';
+      database.ref('player1').update({
+        choice: 'rock'
+      });
+
+      if (p2choice) {
+        console.log("fight");
+      }
+
     } else if (choice === 'paper') {
       $('.player-choice').attr("src", 'assets/images/paper.png');
       p1choice = 'paper';
+      database.ref('player1').update({
+        choice: 'paper'
+      });
+
+      if (p2choice) {
+        console.log("fight");
+      }
+
     } else {
       $('.player-choice').attr('src', 'assets/images/scissors.png');
       p1choice = 'scissors';
+      database.ref('player1').update({
+        choice: 'scissors'
+      });
+
+      if (p2choice) {
+        console.log("fight");
+      }
+
     }
 
   } else if (pnumber === 2) {
@@ -114,12 +137,35 @@ $('.option').click(function(){
     if (choice === 'rock') {
       $('.player-choice').attr('src', 'assets/images/rock.png');
       p2choice = 'rock';
+      database.ref('player2').update({
+        choice: 'rock'
+      });
+
+      if (p1choice) {
+        console.log("fight");
+      }
+
     } else if (choice === 'paper') {
       $('.player-choice').attr("src", 'assets/images/paper.png');
       p2choice = 'paper';
+      database.ref('player2').update({
+        choice: 'paper'
+      });
+
+      if (p1choice) {
+        console.log("fight");
+      }
+
     } else {
       $('.player-choice').attr('src', 'assets/images/scissors.png');
       p2choice = 'scissors';
+      database.ref('player2').update({
+        choice: 'scissors'
+      });
+
+      if (p1choice) {
+        console.log("fight");
+      }
     }
   }
 })
