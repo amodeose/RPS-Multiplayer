@@ -32,9 +32,13 @@ input {
 }
 
 .submit {
-  background-color: red;
+  background-color: blue;
 }
 
 h2 {
   display:inline-block;
+}
+
+img {
+  margin-bottom: 20px;
 }
