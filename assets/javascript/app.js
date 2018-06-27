@@ -106,6 +106,13 @@ $('.option').click(function(){
 
       if (p2choice) {
         $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
+        if (p2choice === 'rock') {
+          $('.message').text("It's a tie!");
+        } else if (p2choice === 'paper') {
+          $('.message').text(p1name + ' wins!');
+        } else {
+          $('.message').text(p2name + ' wins!');
+        }
       }
 
     } else if (choice === 'paper') {
@@ -117,6 +124,13 @@ $('.option').click(function(){
 
       if (p2choice) {
         $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
+        if (p2choice === 'rock') {
+          $('.message').text(p1name + ' wins!');
+        } else if (p2choice === 'paper') {
+          $('.message').text("It's a tie!");
+        } else {
+          $('.message').text(p2name + ' wins!');
+        }
       }
 
     } else {
@@ -128,6 +142,13 @@ $('.option').click(function(){
 
       if (p2choice) {
         $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
+        if (p2choice === 'rock') {
+          $('.message').text(p2name + ' wins!');
+        } else if (p2choice === 'paper') {
+          $('.message').text(p1name + ' wins!');
+        } else {
+          $('.message').text("It's a tie!");
+        }
       }
 
     }
@@ -143,6 +164,13 @@ $('.option').click(function(){
 
       if (p1choice) {
         $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
+        if (p1choice === 'rock') {
+          $('.message').text("It's a tie!");
+        } else if (p1choice === 'paper') {
+          $('.message').text(p1name + ' wins!');
+        } else {
+          $('.message').text(p2name + ' wins!');
+        }
       }
 
     } else if (choice === 'paper') {
@@ -154,6 +182,13 @@ $('.option').click(function(){
 
       if (p1choice) {
         $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
+        if (p1choice === 'rock') {
+          $('.message').text(p2name + ' wins!');
+        } else if (p1choice === 'paper') {
+          $('.message').text("It's a tie!");
+        } else {
+          $('.message').text(p1name + ' wins!');
+        }
       }
 
     } else {
@@ -165,6 +200,13 @@ $('.option').click(function(){
 
       if (p1choice) {
         $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
+        if (p1choice === 'rock') {
+          $('.message').text(p1name + ' wins!');
+        } else if (p1choice === 'paper') {
+          $('.message').text(p2name + ' wins!');
+        } else {
+          $('.message').text("It's a tie!");
+        }
       }
     }
   }
