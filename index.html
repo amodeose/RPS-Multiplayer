@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>RPS Multiplayer</title>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body>
-  <h1><span class="p2name">Player 2</span></h1>
+<body onunload='logout()'>
+  <h1><span class="opponent-name">Opponent</span></h1>
   <div>
     <img class="p2choice"></img>
   </div>
@@ -17,10 +18,13 @@
   <div>
     <img class="p1choice"></img>
   </div>
-  <h1><span class="p1name">Player 1</span></h1>
-  <button value='rock'>Rock</button>
-  <button value='paper'>Paper</button>
-  <button value='scissors'>Scissors</button>
+  <h1><span class="player-name">Player</span></h1>
+  <button value='rock' class="option">Rock</button>
+  <button value='paper' class="option">Paper</button>
+  <button value='scissors' class="option">Scissors</button>
+  <br><br>
+  <input type="text" placeholder="Enter your username" class="username-input">
+  <button class="submit">Submit</button>
   <script src="assets/javascript/app.js"></script>
 </body>
 </html>

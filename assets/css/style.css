@@ -18,8 +18,18 @@ button {
   font-size: 2em;
   border: none;
   border-radius: 5%;
+  margin: 5px;
 }
 
 button:hover {
   opacity: 1;
+}
+
+input {
+  padding: 5px;
+  font-size: 2em;
+}
+
+.submit {
+  background-color: red;
 }
