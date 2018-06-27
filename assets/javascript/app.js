@@ -105,7 +105,7 @@ $('.option').click(function(){
       });
 
       if (p2choice) {
-        console.log("fight");
+        $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
       }
 
     } else if (choice === 'paper') {
@@ -116,7 +116,7 @@ $('.option').click(function(){
       });
 
       if (p2choice) {
-        console.log("fight");
+        $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
       }
 
     } else {
@@ -127,7 +127,7 @@ $('.option').click(function(){
       });
 
       if (p2choice) {
-        console.log("fight");
+        $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
       }
 
     }
@@ -142,7 +142,7 @@ $('.option').click(function(){
       });
 
       if (p1choice) {
-        console.log("fight");
+        $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
       }
 
     } else if (choice === 'paper') {
@@ -153,7 +153,7 @@ $('.option').click(function(){
       });
 
       if (p1choice) {
-        console.log("fight");
+        $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
       }
 
     } else {
@@ -164,7 +164,7 @@ $('.option').click(function(){
       });
 
       if (p1choice) {
-        console.log("fight");
+        $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
       }
     }
   }
