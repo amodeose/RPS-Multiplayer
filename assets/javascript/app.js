@@ -63,8 +63,17 @@ database.ref().on('value', function(snapshot) {
       winner = snapshot.val().winner.username;
       $('.message').text('Winner: ' + winner);
       database.ref("winner").remove();
+
+
+      if (pnumber === 1) {
+        $('.opponent-choice').attr('src', 'assets/images/' + snapshot.val().player2.choice + '.png');
+      } else {
+        $('.opponent-choice').attr('src', 'assets/images/' + snapshot.val().player1.choice + '.png');
+      }
+
       database.ref("player1").child('choice').remove();
       database.ref("player2").child('choice').remove();
+
     }
 });
 
@@ -116,7 +125,7 @@ $('.option').click(function(){
       });
 
       if (p2choice) {
-        $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
+
         if (p2choice === 'rock') {
           database.ref('winner').set({
             username: "tie"
@@ -140,7 +149,6 @@ $('.option').click(function(){
       });
 
       if (p2choice) {
-        $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
         if (p2choice === 'rock') {
           database.ref('winner').set({
             username: p1name
@@ -164,7 +172,6 @@ $('.option').click(function(){
       });
 
       if (p2choice) {
-        $('.opponent-choice').attr('src', 'assets/images/' + p2choice + '.png');
         if (p2choice === 'rock') {
           database.ref('winner').set({
             username: p2name
@@ -192,7 +199,6 @@ $('.option').click(function(){
       });
 
       if (p1choice) {
-        $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
         if (p1choice === 'rock') {
           database.ref('winner').set({
             username: "tie"
@@ -216,7 +222,6 @@ $('.option').click(function(){
       });
 
       if (p1choice) {
-        $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
         if (p1choice === 'rock') {
           database.ref('winner').set({
             username: p2name
@@ -240,7 +245,6 @@ $('.option').click(function(){
       });
 
       if (p1choice) {
-        $('.opponent-choice').attr('src', 'assets/images/' + p1choice + '.png');
         if (p1choice === 'rock') {
           database.ref('winner').set({
             username: p1name
