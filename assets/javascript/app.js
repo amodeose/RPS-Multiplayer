@@ -5,7 +5,6 @@ var p2choice;
 var p1name;
 var p2name;
 var pnumber = false;
-
 $('.option').toggle();
 
 // Initialize Firebase
@@ -23,18 +22,41 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-database.ref().once('value', function(snapshot) {
+// Assign player number
 
-    if (snapshot.child("player1").exists()) {
+database.ref().once('value', function(snapshot) {
+    if (snapshot.child("player1").exists() && snapshot.child("player2").exists()) {
+      pnumber = "none";
+    } else if (snapshot.child("player1").exists()) {
       pnumber = 2;
     } else {
       pnumber = 1;
     };
-
 });
 
+// Keep variables updated
 
+database.ref().on('value', function(snapshot) {
+    if (snapshot.child("player1").exists()) {
+      p1name = snapshot.val().player1.username;
+      p1choice = snapshot.val().player1.choice;
 
+      if (pnumber === 2) {
+        $('.opponent-name').text(p1name);
+      }
+
+    };
+
+    if (snapshot.child("player2").exists()) {
+      p2name = snapshot.val().player2.username;
+      p2choice = snapshot.val().player2.choice;
+
+      if (pnumber === 1) {
+        $('.opponent-name').text(p2name);
+      }
+
+    }
+});
 
 // Username Function
 
@@ -47,7 +69,8 @@ $('.submit').click(function(){
     $('.submit').remove();
     $('.username-input').remove();
     database.ref('player1').set({
-      username: p1name
+      username: p1name,
+      choice: ""
     });
     $('.option').toggle();
 
@@ -58,25 +81,46 @@ $('.submit').click(function(){
     $('.submit').remove();
     $('.username-input').remove();
     database.ref('player2').set({
-      username: p2name
+      username: p2name,
+      choice: ""
     });
     $('.option').toggle();
   } else {
-
-  }
-
+    $('.player-name').text('Too many players. Try again later.');
+  };
 })
 
 // Choice Function
 
 $('.option').click(function(){
-  p1choice = $(this).text().toLowerCase();
-  if (p1choice === 'rock') {
-    $('.p1choice').attr('src', 'assets/images/rock.png');
-  } else if (p1choice === 'paper') {
-    $('.p1choice').attr("src", 'assets/images/paper.png');
-  } else {
-    $('.p1choice').attr('src', 'assets/images/scissors.png');
+
+  var choice = $(this).text().toLowerCase();
+
+  if (pnumber === 1) {
+
+    if (choice === 'rock') {
+      $('.player-choice').attr('src', 'assets/images/rock.png');
+      p1choice = 'rock';
+    } else if (choice === 'paper') {
+      $('.player-choice').attr("src", 'assets/images/paper.png');
+      p1choice = 'paper';
+    } else {
+      $('.player-choice').attr('src', 'assets/images/scissors.png');
+      p1choice = 'scissors';
+    }
+
+  } else if (pnumber === 2) {
+
+    if (choice === 'rock') {
+      $('.player-choice').attr('src', 'assets/images/rock.png');
+      p2choice = 'rock';
+    } else if (choice === 'paper') {
+      $('.player-choice').attr("src", 'assets/images/paper.png');
+      p2choice = 'paper';
+    } else {
+      $('.player-choice').attr('src', 'assets/images/scissors.png');
+      p2choice = 'scissors';
+    }
   }
 })
 
