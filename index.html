@@ -5,27 +5,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>RPS Multiplayer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body onunload="logout()">
-  <h2>Wins: <span class="opponent-wins"></span></h2>
-  <h1><span class="opponent-name">Opponent</span></h1>
-  <div>
-    <img class="opponent-choice"></img>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1><span class="player-name">Player</span></h1>
+      </div>
+      <div class="col-sm-4">
+        <input type="text" placeholder="Enter username" class="username-input">
+        <button class="submit">Submit</button>
+      </div>
+
+      <div class="col-sm-4">
+        <h1><span class="opponent-name">Opponent</span></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>Wins: <span class="player-wins"></span></h2>
+      </div>
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <h2>Wins: <span class="opponent-wins"></span></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <h2 class='message'></h2>
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-3">
+        <img class="player-choice"></img>
+      </div>
+      <div class="col-sm-3">
+        <img class="opponent-choice"></img>
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-2">
+        <button value='rock' class="option">Rock</button>
+      </div>
+      <div class="col-sm-2">
+        <button value='paper' class="option">Paper</button>
+      </div>
+      <div class="col-sm-2">
+        <button value='scissors' class="option">Scissors</button>
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
   </div>
-  <h2 class='message'></h2>
-  <div>
-    <img class="player-choice"></img>
-  </div>
-  <h1><span class="player-name">Player</span></h1>
-  <h2>Wins: <span class="player-wins"></span></h2>
-  <button value='rock' class="option">Rock</button>
-  <button value='paper' class="option">Paper</button>
-  <button value='scissors' class="option">Scissors</button>
-  <input type="text" placeholder="Enter your username" class="username-input">
-  <button class="submit">Submit</button>
+
   <script src="assets/javascript/app.js"></script>
 </body>
 </html>

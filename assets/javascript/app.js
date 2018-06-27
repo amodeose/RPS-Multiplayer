@@ -110,8 +110,8 @@ $('.submit').click(function(){
 
     p2name = $('.username-input').val();
     $('.player-name').text(p2name);
-    $('.submit').remove();
-    $('.username-input').remove();
+    $('.submit').hide();
+    $('.username-input').hide();
     database.ref('player2').set({
       username: p2name,
       wins: 0
