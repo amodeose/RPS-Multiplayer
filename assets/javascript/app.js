@@ -350,5 +350,4 @@ $('.send').click(function(){
   } else {
     database.ref('messages').push(p2name + ': ' + newMessage);
   }
-
 })
