@@ -8,6 +8,7 @@ var p1wins = 0;
 var p2wins = 0;
 var winner = false;
 var pnumber = false;
+var dialogue;
 $('.option').hide();
 $('.text').hide();
 $('.waiting').hide();
@@ -94,6 +95,12 @@ database.ref().on('value', function(snapshot) {
   } else {
     $('.player-wins').text(p2wins);
     $('.opponent-wins').text(p1wins);
+  }
+
+  dialogue = snapshot.val().messages;
+  $('.dialogue').children().remove();
+  for (key in dialogue) {
+    $('.dialogue').append($('<p>').text(dialogue[key]))
   }
 
 });
@@ -330,4 +337,13 @@ function logout() {
   } else if (pnumber === 2) {
     database.ref("player2").remove();
   }
+  database.ref("messages").remove();
 }
+
+// Send Message Function //
+
+$('.send').click(function(){
+  var newMessage = $('.message-input').val();
+  database.ref('messages').push(newMessage);
+  $('.message-input').val('');
+})

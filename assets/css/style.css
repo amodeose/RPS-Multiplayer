@@ -62,3 +62,10 @@ img {
   height: 150px;
   margin-top: 10px;
 }
+
+p {
+  text-align: left;
+  margin-left: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
