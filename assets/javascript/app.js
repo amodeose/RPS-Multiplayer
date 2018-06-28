@@ -2,13 +2,15 @@
 
 var p1choice = false;
 var p2choice = false;
-var p1name;
-var p2name;
+var p1name = false;
+var p2name = false;
 var p1wins = 0;
 var p2wins = 0;
 var winner = false;
 var pnumber = false;
-$('.option').toggle();
+$('.option').hide();
+$('.text').hide();
+$('.waiting').hide();
 
 // Initialize Firebase //
 
@@ -48,6 +50,9 @@ database.ref().on('value', function(snapshot) {
 
     if (pnumber === 2) {
       $('.opponent-name').text(p1name);
+      $('.text').show();
+      $('.option').show();
+      $('.waiting').hide();
     }
   };
 
@@ -58,6 +63,9 @@ database.ref().on('value', function(snapshot) {
 
     if (pnumber === 1) {
       $('.opponent-name').text(p2name);
+      $('.text').show();
+      $('.option').show();
+      $('.waiting').hide();
     }
   }
 
@@ -104,7 +112,9 @@ $('.submit').click(function(){
       username: p1name,
       wins: 0
     });
-    $('.option').toggle();
+    if (!p2name) {
+      $('.waiting').show();
+    }
 
   } else if (pnumber === 2) {
 
@@ -116,7 +126,11 @@ $('.submit').click(function(){
       username: p2name,
       wins: 0
     });
-    $('.option').toggle();
+
+    if (!p2name) {
+      $('.waiting').show();
+    }
+
   } else {
     $('.player-name').text('Too many players. Try again later.');
   };
