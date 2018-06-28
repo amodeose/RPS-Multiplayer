@@ -344,6 +344,11 @@ function logout() {
 
 $('.send').click(function(){
   var newMessage = $('.message-input').val();
-  database.ref('messages').push(newMessage);
   $('.message-input').val('');
+  if (pnumber === 1) {
+    database.ref('messages').push(p1name + ': ' + newMessage);
+  } else {
+    database.ref('messages').push(p2name + ': ' + newMessage);
+  }
+
 })
